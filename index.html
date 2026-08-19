@@ -301,50 +301,133 @@ header.solid .navbar{background:rgba(5,7,12,.9);border-bottom-color:rgba(255,255
   .eco{height:360px}
 }
 
-/* ---------- Extra mobile responsive fixes ---------- */
-@media(max-width:1024px){
-  /* Featured Project (Novara): the inline 6-col grid never collapsed */
-  .reveal[style*="grid-template-columns:repeat(6,1fr)"]{grid-template-columns:1fr!important;gap:16px!important}
-  .reveal[style*="grid-template-columns:repeat(6,1fr)"] > *{grid-column:span 1!important}
-  /* PDF app preview pages: 4-col → 2-col on tablet */
-  .app > div[style*="grid-template-columns:repeat(4,1fr)"]{grid-template-columns:repeat(2,1fr)!important;gap:14px!important}
+/* ==============================================
+   ADDITIONAL RESPONSIVE FIXES (mobile polish)
+   ============================================== */
+
+/* Inline-styled 3-col service lists (Studio 02 + Research) collapse on mobile */
+@media(max-width:760px){
+  .svc-list-3{grid-template-columns:1fr 1fr !important;max-width:100% !important}
 }
-@media(max-width:640px){
-  /* Featured Project stays single column on phone */
-  .reveal[style*="grid-template-columns:repeat(6,1fr)"]{grid-template-columns:1fr!important}
-  /* PDF app preview pages: 2-col → 1-col on phone */
-  .app > div[style*="grid-template-columns:repeat(4,1fr)"]{grid-template-columns:1fr!important}
-  /* Service lists with inline grid-template-columns beat the earlier 1fr rule */
-  .svc-list[style*="grid-template-columns"]{grid-template-columns:1fr!important}
-  /* Hero ecosystem: clip the absolutely-positioned floating nodes so they don't push off-screen */
-  .eco{overflow:hidden}
-  /* PDF viewer top bar: the long filename is 38 chars and overflows the small bar */
-  .pdfbar{font-size:8.5px;padding:8px 10px;gap:8px}
-  .pdfbar > span:first-child{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:55%}
-  /* Mobile menu: larger touch targets for thumbs */
-  .mobile nav a{padding:18px 0}
-  /* Hero heading: tight letter-spacing on small screens */
-  .hero h1{letter-spacing:-.025em}
-  /* Header: drop the small "ARCHITECT AGENCY" caption so the burger has room */
-  .logo-txt small{display:none}
-  /* Section vertical padding is a touch looser than the 64px floor on phones */
-  .sec{padding:50px 0}
-  /* Hero stats spacing tighter on small viewports */
-  .hero-stats{gap:18px;margin-top:38px;padding-top:22px}
+@media(max-width:480px){
+  .svc-list-3{grid-template-columns:1fr !important}
+}
+
+/* Novara featured project grid - collapses 6-col inline grid */
+@media(max-width:1024px){
+  .featured-novara{grid-template-columns:repeat(3,1fr) !important}
+  .featured-novara .fg-logo,
+  .featured-novara .fg-brand,
+  .featured-novara .fg-social{grid-column:span 1 !important}
+  .featured-novara .fg-website{grid-column:span 3 !important}
+}
+@media(max-width:760px){
+  .featured-novara{grid-template-columns:1fr 1fr !important}
+  .featured-novara .fg-logo,
+  .featured-novara .fg-brand,
+  .featured-novara .fg-social{grid-column:span 1 !important}
+  .featured-novara .fg-website{grid-column:span 2 !important}
+}
+@media(max-width:480px){
+  .featured-novara{grid-template-columns:1fr !important;gap:14px !important}
+  .featured-novara .fg-cell{grid-column:span 1 !important;min-height:auto !important;padding:22px !important}
+  .featured-novara .fg-social{grid-template-rows:auto !important}
+}
+
+/* Header logo - shrink on very small screens */
+@media(max-width:420px){
+  .logo-txt b{font-size:11.5px;letter-spacing:.08em}
+  .logo-txt small{font-size:6.5px;letter-spacing:.2em}
+  .mark{width:34px;height:34px;border-radius:9px}
+  .mark span{font-size:12px}
+  .nav{gap:12px}
+}
+
+/* Hero ecosystem - reduce min height on small mobile */
+@media(max-width:480px){
+  .eco{height:340px}
+  .mini-ppt,.mini-xls,.mini-doc,.mini-pdf{font-size:5px}
 }
 @media(max-width:380px){
-  /* Very small phones (iPhone SE 1st gen, Galaxy Fold cover, etc.) */
-  .sec{padding:42px 0}
-  .btn{padding:12px 18px;font-size:13px}
-  .mark{width:36px;height:36px}
-  .logo-txt b{font-size:11.5px;letter-spacing:.1em}
-  .wrap{width:min(1240px,88vw)}
-  .hero{padding-top:130px;padding-bottom:64px}
-  .hero h1{font-size:clamp(1.85rem,8vw,2.4rem)}
-  .h-xl{font-size:clamp(1.7rem,7vw,2.4rem)}
-  .h-lg{font-size:clamp(1.45rem,6vw,2rem)}
-  .nav{height:64px;gap:14px}
-  .navbar ~ .mobile,.mobile{top:64px;max-height:calc(100vh - 64px)}
+  .eco{height:300px}
+}
+
+/* Pipeline - 1 column on very small screens */
+@media(max-width:480px){
+  .pipe{grid-template-columns:1fr !important;gap:8px !important}
+  .pipe div{padding:14px 12px}
+}
+
+/* Section h2 - allow forced line breaks to flow on very small screens */
+@media(max-width:480px){
+  h2.h-xl br, h2.h-lg br{display:none}
+  h2.h-xl, h2.h-lg{line-height:1.15}
+}
+
+/* Hero h1 - let it wrap naturally on very small screens */
+@media(max-width:480px){
+  .hero h1{font-size:clamp(1.55rem,7.2vw,2.1rem) !important;line-height:1.12 !important;word-wrap:break-word;overflow-wrap:break-word;hyphens:auto}
+  .hero h1 br{display:none}
+}
+@media(max-width:380px){
+  .hero h1{font-size:1.45rem !important}
+}
+
+/* Hero stats - wrap better on very small */
+@media(max-width:420px){
+  .hero-stats{gap:16px !important;margin-top:36px !important;padding-top:22px !important}
+  .hero-stats div{flex:1 1 40%}
+  .hero-stats div b{font-size:1.2rem !important}
+}
+
+/* Contact form - reduce padding on very small */
+@media(max-width:480px){
+  form#enq{padding:18px !important}
+  .field input,.field select,.field textarea{padding:12px 13px !important;font-size:13.5px !important}
+}
+
+/* Footer grid - tighter on small */
+@media(max-width:480px){
+  .fgrid{gap:28px !important;padding-bottom:36px !important}
+  .fbot{flex-direction:column;align-items:flex-start;gap:10px}
+  .fbot span:last-child{font-size:9.5px !important;letter-spacing:.14em !important}
+}
+
+/* Modal - fit small screens */
+@media(max-width:480px){
+  .modal{padding:12px !important}
+  .modal-box{padding:22px !important;max-height:92vh}
+  .modal-box h3{font-size:20px !important}
+  .mrow{font-size:12px !important}
+}
+
+/* Office tabs - prevent overflow on very small */
+@media(max-width:420px){
+  .office-tabs{gap:6px !important}
+  .otab{font-size:10px !important;letter-spacing:.12em !important;padding:8px 12px !important}
+}
+
+/* Pipeline buttons - wrap on small */
+@media(max-width:380px){
+  .hero-btns{gap:10px !important}
+  .hero-btns .btn{padding:12px 18px !important;font-size:13px !important}
+  .btn{padding:12px 20px !important;font-size:13px !important}
+}
+
+/* Prevent horizontal overflow in any small card content */
+@media(max-width:480px){
+  .bcard-vis{aspect-ratio:4/3.4}
+  .camp-vis{aspect-ratio:1/1}
+  .doc-page{font-size:5.5px}
+}
+
+/* Brand cards content overflow guard */
+@media(max-width:380px){
+  .nl-bot{grid-template-columns:1fr !important;gap:6px !important}
+  .nl-sw{flex-direction:row !important;display:flex !important}
+  .nl-sw i{flex:1 !important;height:10px !important}
+  .pass .l .row{gap:6px !important}
+  .pass .l .row div b{font-size:6px !important}
 }
 </style>
 </head>
@@ -636,7 +719,7 @@ header.solid .navbar{background:rgba(5,7,12,.9);border-bottom-color:rgba(255,255
           <div class="eyebrow">Studio 02</div>
           <h3 class="h-md" style="color:#fff">GRAPHIC DESIGN &amp; BRANDING</h3>
         </div>
-        <ul class="svc-list" style="grid-template-columns:repeat(3,auto);margin:0">
+        <ul class="svc-list svc-list-3" style="grid-template-columns:repeat(3,auto);margin:0">
           <li>Logo Design</li><li>Brand Identity</li><li>Advertisement Design</li>
           <li>Graphic Design</li><li>Social Media Graphics</li><li>Product Branding</li>
         </ul>
@@ -951,7 +1034,7 @@ header.solid .navbar{background:rgba(5,7,12,.9);border-bottom-color:rgba(255,255
       <div class="eyebrow">Studio 04 — Academic &amp; Corporate</div>
       <h2 class="h-lg">RESEARCH &amp;<br>REPORT WRITING</h2>
       <p class="lead" style="margin-top:20px">University projects, research proposals, literature reviews, master's theses, PhD dissertations and corporate research reports — structured, cited, formatted and typeset to publication standard.</p>
-      <ul class="svc-list" style="grid-template-columns:repeat(3,1fr);max-width:760px">
+      <ul class="svc-list svc-list-3" style="grid-template-columns:repeat(3,1fr);max-width:760px">
         <li>University Projects</li><li>Research Proposals</li><li>Literature Reviews</li>
         <li>Master's Thesis</li><li>PhD Dissertation</li><li>Corporate Reports</li>
       </ul>
@@ -1806,9 +1889,9 @@ footer{background:#04060b;color:#8d9bb4;padding:70px 0 0;border-top:1px solid rg
       <h2 class="h-lg">NOVARA RAIL —<br>A COMPLETE DIGITAL IDENTITY</h2>
       <p class="lead" style="margin-top:20px">A high-speed regional rail operator, built end to end: brand mark, identity system, booking website, social graphics and internal business documentation. One coherent system, not isolated designs.</p>
     </div>
-    <div class="reveal" style="display:grid;grid-template-columns:repeat(6,1fr);gap:18px">
+    <div class="reveal featured-novara" style="display:grid;grid-template-columns:repeat(6,1fr);gap:18px">
       <!-- logo -->
-      <div style="grid-column:span 2;background:#0b1a2b;border-radius:12px;padding:30px;display:grid;place-items:center;min-height:220px;box-shadow:var(--shadow)">
+      <div class="fg-cell fg-logo" style="grid-column:span 2;background:#0b1a2b;border-radius:12px;padding:30px;display:grid;place-items:center;min-height:220px;box-shadow:var(--shadow)">
         <div style="text-align:center">
           <svg width="70" height="70" viewBox="0 0 70 70" fill="none"><path d="M10 46h50M14 46V26a10 10 0 0110-10h22a10 10 0 0110 10v20" stroke="#38bdf8" stroke-width="2"/><path d="M14 32h42" stroke="#fff" stroke-width="2"/><circle cx="24" cy="52" r="3.5" stroke="#38bdf8" stroke-width="2"/><circle cx="46" cy="52" r="3.5" stroke="#38bdf8" stroke-width="2"/></svg>
           <div style="font-family:var(--fd);font-size:15px;letter-spacing:.3em;color:#fff;margin-top:14px">NOVARA</div>
@@ -1816,7 +1899,7 @@ footer{background:#04060b;color:#8d9bb4;padding:70px 0 0;border-top:1px solid rg
         </div>
       </div>
       <!-- brand system -->
-      <div style="grid-column:span 2;background:#fff;border-radius:12px;padding:26px;box-shadow:var(--shadow)">
+      <div class="fg-cell fg-brand" style="grid-column:span 2;background:#fff;border-radius:12px;padding:26px;box-shadow:var(--shadow)">
         <div style="font-family:var(--fm);font-size:9.5px;letter-spacing:.2em;color:var(--gray-400)">IDENTITY SYSTEM</div>
         <div style="display:flex;gap:6px;margin-top:14px"><i style="flex:1;height:38px;background:#0b1a2b;border-radius:5px;display:block"></i><i style="flex:1;height:38px;background:#0ea5e9;border-radius:5px;display:block"></i><i style="flex:1;height:38px;background:#38bdf8;border-radius:5px;display:block"></i><i style="flex:1;height:38px;background:#e2e8f0;border-radius:5px;display:block"></i></div>
         <div style="margin-top:16px;font-family:var(--fd);font-size:30px;color:#0b1a2b;line-height:1">Aa</div>
@@ -1824,7 +1907,7 @@ footer{background:#04060b;color:#8d9bb4;padding:70px 0 0;border-top:1px solid rg
         <div style="display:flex;gap:6px;margin-top:14px;flex-wrap:wrap"><span style="font-family:var(--fm);font-size:9px;padding:4px 9px;border:1px solid var(--gray-200);border-radius:100px">TICKETING</span><span style="font-family:var(--fm);font-size:9px;padding:4px 9px;border:1px solid var(--gray-200);border-radius:100px">SIGNAGE</span><span style="font-family:var(--fm);font-size:9px;padding:4px 9px;border:1px solid var(--gray-200);border-radius:100px">LIVERY</span></div>
       </div>
       <!-- social -->
-      <div style="grid-column:span 2;display:grid;grid-template-rows:1fr 1fr;gap:18px">
+      <div class="fg-cell fg-social" style="grid-column:span 2;display:grid;grid-template-rows:1fr 1fr;gap:18px">
         <div style="background:linear-gradient(140deg,#0ea5e9,#0b1a2b);border-radius:12px;padding:20px;color:#fff;box-shadow:var(--shadow)">
           <div style="font-family:var(--fm);font-size:9px;letter-spacing:.22em;opacity:.8">SOCIAL · 1:1</div>
           <div style="font-family:var(--fd);font-size:19px;line-height:1.05;margin-top:10px">City to coast<br>in 74 minutes.</div>
@@ -1840,7 +1923,7 @@ footer{background:#04060b;color:#8d9bb4;padding:70px 0 0;border-top:1px solid rg
         </div>
       </div>
       <!-- website -->
-      <div style="grid-column:span 6">
+      <div class="fg-cell fg-website" style="grid-column:span 6">
         <div class="browser" style="border-color:var(--gray-200)">
           <div class="bbar"><span class="dot" style="background:#ff5f57"></span><span class="dot" style="background:#febc2e"></span><span class="dot" style="background:#28c840"></span><span class="u">https://novararail.com — Book your journey</span></div>
           <div style="background:#fff">
